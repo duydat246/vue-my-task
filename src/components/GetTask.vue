@@ -1,0 +1,42 @@
+<template>
+  <div id="get-task">
+    <form @submit.prevent="addTask">
+      <input
+        type="text"
+        class="form-control"
+        :value="newTask"
+        @change="getTask"
+        placeholder="Tôi cần phải làm..."
+      />
+      <br />
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-plus"></i> New Task
+      </button>
+    </form>
+  </div>
+</template>
+
+<script>
+import Vuex from "vuex";
+export default {
+  methods: {
+    getTask(e) {
+      this.$store.dispatch("getTask", e.target.value);
+    },
+    addTask(e) {
+      e.preventDefault();
+      this.$store.dispatch("addTask");
+      this.$store.dispatch("clearTask");
+    }
+  },
+  computed: {
+    newTask() {
+      return this.$store.getters.newTask;
+    }
+  }
+};
+</script>
+
+<style>
+
+</style>
